@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string-array name="Jobs">
+            <item>Farmer</item>
+            <item>Garbage Man</item>
+            <item>Potato Peeler</item>
+            <item>Engineer</item>
+            <item>lolCatz</item>
+        </string-array>
+        <string-array name="Jobs_etc">
+            <item >#EEEEEE</item>
+            <item >#00FF00</item>
+            <item >#F2712B</item>
+            <item >#FF59B1</item>
+            <item >#FFFF00</item>
+        </string-array>
+</resources>
