@@ -14,8 +14,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.CheckBox;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import koders.country.cross.code.dataapi.ConcreteDataProvider;
 import koders.country.cross.code.dataapi.DataProvider;
@@ -25,6 +28,13 @@ import koders.country.cross.code.dataapi.datatypes.Occupation;
 public class MainActivity extends ActionBarActivity {
 
     private List<Occupation> theOccupations;
+
+    private ListView interestsLV;
+    private ListView occupationsLV;
+    private ArrayAdapter<String> interestsArrAd;
+    private ArrayAdapter<String> occupationsArrAd;
+    private  ArrayList<String> interestsArrStr;
+    private  ArrayList<String> occupationsArrStr;
 
     CheckBox[] cb = new CheckBox[6];
 
@@ -42,75 +52,24 @@ public class MainActivity extends ActionBarActivity {
 
         DataProvider puff = ConcreteDataProvider.getTheInstance();
 
-        ScrollView sv = new ScrollView(this);
-        final LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.VERTICAL);
-        sv.addView(ll);
-
+        interestsLV = (ListView) findViewById( R.id.InterestslistView );
+        interestsArrStr = new ArrayList<String>();
         for (Interest intR : Interest.values()) {
-            CheckBox ch = new CheckBox(this);
-            ll.addView(ch);
-            ch.setText(intR.toString());
+            interestsArrStr.add(intR.toString());
         }
+        interestsArrAd = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_list_item_checked, interestsArrStr );
+        interestsLV.setAdapter( interestsArrAd );
 
+        occupationsLV = (ListView)findViewById(R.id.OccupationsListView );
+        occupationsArrStr = new ArrayList<String>();
         for ( Occupation iterOccup : puff.getAllOccupations( null ) ) {
-            TextView tv = new TextView(this);
-            ll.addView(tv);
-            tv.setText(iterOccup.getDisplayName());
+            occupationsArrStr.add(iterOccup.getDisplayName());
         }
+        occupationsArrAd = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_selectable_list_item, occupationsArrStr );
 
-        Button b = new Button(this);
-        b.setText("Take Me To Job Selections Until Wallace Fixes the Occupation Select. :)");
-        ll.addView(b);
-
-        b.setOnClickListener( new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                submitJobSelections(v);
-            }
-        });
-
-        // ** Some other kinds of Dynamic widgets
-/* works
-        for (int i = 0; i < 6; i++) {
-            cb[i] = new CheckBox(this);
-            ll.addView(cb[i]);
-            cb[i].setText("Dynamic Checkbox " + i);
-            cb[i].setId(i + 6);
-
-        }
-*/
-        /*
-        TextView tv = new TextView(this);
-        tv.setText("Dynamic layouts ftw!");
-        ll.addView(tv);
-
-        EditText et = new EditText(this);
-        et.setText("weeeeeeeeeee~!");
-        ll.addView(et);
-
-        Button b = new Button(this);
-        b.setText("I don't do anything, but I was added dynamically. :)");
-        ll.addView(b);
-
-        b.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                for (int i = 0; i < 20; i++) {
-                    CheckBox ch = new CheckBox(getApplicationContext());
-                    ch.setText("I'm dynamic!");
-
-                    ll.addView(ch);
-                }
-            }
-        });
-        */
-
-        // This commits the dynamic content to the view
-        this.setContentView(sv);
+        occupationsLV.setAdapter( occupationsArrAd );
 
     }
 
