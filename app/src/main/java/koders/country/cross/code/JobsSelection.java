@@ -94,12 +94,13 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs_selection);
 
-        location = mLocationAddressTextView.toString();
 
         /**  TRYING to figure out how to pass an Occupation object from one activity to another using Intents.
         * TODO: determine how to pass an Occupation object, or data from main activity to Jobs
         */
         /*
+        location = mLocationAddressTextView.toString();
+
         Occupation occupationPrimary = new Occupation("5555", "Test", 54);
 
         Intent intentPrime = new Intent(this, JobsSelection.class);
