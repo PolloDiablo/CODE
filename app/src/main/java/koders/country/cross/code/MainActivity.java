@@ -75,8 +75,9 @@ public class MainActivity extends ActionBarActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String occupation = String.valueOf(parent.getItemAtPosition(position));
-                        Toast.makeText(MainActivity.this, occupation, Toast.LENGTH_SHORT).show();
+                        // String occupation = String.valueOf(parent.getItemAtPosition(position));
+                        // Toast.makeText(MainActivity.this, occupation, Toast.LENGTH_SHORT).show();
+                        submitJobSelections( view );
                     }
                 }
         );
