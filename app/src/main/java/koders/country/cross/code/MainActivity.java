@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import java.util.List;
@@ -67,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
         interestsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int x = 1;
+                updateTheOccupationsStringArray( null );
             }
         });
 
@@ -100,6 +101,19 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    private void updateTheOccupationsStringArray(List<Interest> inInterests ) {
+        DataProvider puff = ConcreteDataProvider.getTheInstance();
+        occupationsArrStr.clear();
+        // ** test
+        occupationsArrStr.add("BarfADoodle");
+
+        for ( Occupation iterOccup : puff.getAllOccupations( inInterests ) ) {
+            occupationsArrStr.add(iterOccup.getDisplayName());
+        }
+
+
+        ((BaseAdapter) occupationsLV.getAdapter()).notifyDataSetChanged();
+    }
 
     //This will submit the GPS Data to the Jobs Selection Activity
     public void submitJobSelections(View view) {
