@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import java.util.List;
@@ -60,12 +61,25 @@ public class MainActivity extends ActionBarActivity {
         interestsArrAd = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_list_item_checked, interestsArrStr );
         interestsLV.setAdapter( interestsArrAd );
+        interestsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO:
+                //  Which item is this and is it selected or unselected
+                //  Then refresh the occupation list based on the updated Interests selection
+                updateTheOccupationsStringArray( null );
+            }
+        });
 
+        // TODO:
+        // put the update of the Occupations list into a Method in this class
+        // so that it can be called from here and above in the onItemClick listener when the Interests change
+        // NOTE:  May only have to update the Occupations text array with the new values
+        //        AND Skip the recreation of the Custom
         occupationsLV = (ListView)findViewById(R.id.OccupationsListView );
         occupationsArrStr = new ArrayList<>();
         for ( Occupation iterOccup : puff.getAllOccupations( null ) ) {
             occupationsArrStr.add(iterOccup.getDisplayName());
-
         }
         occupationsArrAd = new customAdapter(this, android.R.layout.simple_selectable_list_item, occupationsArrStr );
 
@@ -84,6 +98,19 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    private void updateTheOccupationsStringArray(List<Interest> inInterests ) {
+        DataProvider puff = ConcreteDataProvider.getTheInstance();
+        occupationsArrStr.clear();
+        // ** test
+        occupationsArrStr.add("BarfADoodle");
+
+        for ( Occupation iterOccup : puff.getAllOccupations( inInterests ) ) {
+            occupationsArrStr.add(iterOccup.getDisplayName());
+        }
+
+
+        ((BaseAdapter) occupationsLV.getAdapter()).notifyDataSetChanged();
+    }
 
     //This will submit the GPS Data to the Jobs Selection Activity
     public void submitJobSelections(View view) {
