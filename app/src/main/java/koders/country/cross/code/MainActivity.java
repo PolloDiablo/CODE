@@ -64,6 +64,13 @@ public class MainActivity extends ActionBarActivity {
 
 
         interestsLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        interestsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int x = 1;
+            }
+        });
+
         //interestsLV.setItemChecked(0, true);
 
 
@@ -88,6 +95,8 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
         );
+
+
 
     }
 
