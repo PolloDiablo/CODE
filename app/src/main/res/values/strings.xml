@@ -3,7 +3,7 @@
 
     <string name="app_name">CODE</string>
     <string name="action_settings">Settings</string>
-    <string name="location_TextField">Kingston, ON</string>
+    <string name="location_TextField">Kingston</string>
     <string name="app_Title">Name Pending</string>
     <string name="gps_button">GPS</string>
     <string name="location_header">Location:</string>
@@ -19,5 +19,12 @@
     <string name="address_found">Address found.</string>
     <string name="no_geocoder_available">No geocoder available.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string-array name="list_of_cities">
+        <item >Calgary</item>
+        <item >Vancouver</item>
+        <item >Victoria</item>
+        <item >Kingston</item>
+        <item >Toronto</item>
+        <item >Edmonton</item>
+    </string-array>
 </resources>
