@@ -27,4 +27,16 @@
     <item >Toronto</item>
     <item >Edmonton</item>
     </string-array>
+    <string-array name="list_of_occupation_icons">
+        <item>R.drawable.cube</item>
+        <item>R.drawable.cube</item>
+        <item>R.drawable.cube</item>
+        <item>R.drawable.cube</item>
+        <item>R.drawable.cube</item>
+        <item>R.drawable.cube</item>
+        <item>R.drawable.cube</item>
+        <item>R.drawable.cube</item>
+        <item>R.drawable.cube</item>
+        <item>R.drawable.cube</item>
+    </string-array>
 </resources>

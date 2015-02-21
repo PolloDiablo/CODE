@@ -5,9 +5,9 @@ import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
-
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-
+import android.widget.AdapterView;
 import android.widget.ScrollView;
 import android.widget.LinearLayout;
 import android.widget.Button;
@@ -16,10 +16,10 @@ import android.widget.EditText;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.ArrayList;
-
 import koders.country.cross.code.dataapi.ConcreteDataProvider;
 import koders.country.cross.code.dataapi.DataProvider;
 import koders.country.cross.code.dataapi.datatypes.Interest;
@@ -31,8 +31,8 @@ public class MainActivity extends ActionBarActivity {
 
     private ListView interestsLV;
     private ListView occupationsLV;
-    private ArrayAdapter<String> interestsArrAd;
-    private ArrayAdapter<String> occupationsArrAd;
+    private ArrayAdapter interestsArrAd;
+    private ArrayAdapter occupationsArrAd;
     private  ArrayList<String> interestsArrStr;
     private  ArrayList<String> occupationsArrStr;
 
@@ -57,19 +57,29 @@ public class MainActivity extends ActionBarActivity {
         for (Interest intR : Interest.values()) {
             interestsArrStr.add(intR.toString());
         }
-        interestsArrAd = new ArrayAdapter<String>(getApplicationContext(),
+        interestsArrAd = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_list_item_checked, interestsArrStr );
         interestsLV.setAdapter( interestsArrAd );
 
         occupationsLV = (ListView)findViewById(R.id.OccupationsListView );
-        occupationsArrStr = new ArrayList<String>();
+        occupationsArrStr = new ArrayList<>();
         for ( Occupation iterOccup : puff.getAllOccupations( null ) ) {
             occupationsArrStr.add(iterOccup.getDisplayName());
+
         }
-        occupationsArrAd = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_selectable_list_item, occupationsArrStr );
+        occupationsArrAd = new customAdapter(this, android.R.layout.simple_selectable_list_item, occupationsArrStr );
 
         occupationsLV.setAdapter( occupationsArrAd );
+
+        occupationsLV.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String occupation = String.valueOf(parent.getItemAtPosition(position));
+                        Toast.makeText(MainActivity.this, occupation, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
 
     }
 
