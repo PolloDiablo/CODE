@@ -6,19 +6,17 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <application>
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:allowBackup="true"
-            android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme"
-            android:value="@integer/google_play_services_version" />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:value="@integer/google_play_services_version" >
+
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,8 +25,7 @@
         </activity>
         <activity
             android:name=".JobsSelection"
-            android:label="@string/title_activity_jobs_selection"
-            android:theme="@style/AppTheme" >
+            android:label="@string/title_activity_jobs_selection" >
         </activity>
 
         <service
