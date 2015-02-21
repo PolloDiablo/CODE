@@ -9,7 +9,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,12 +83,24 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
     protected String longitude;
 
 
-
+    private AutoCompleteTextView actv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs_selection);
+
+        String[] countries = getResources().
+                getStringArray(R.array.list_of_cities);
+        ArrayAdapter adapter = new ArrayAdapter
+                (this,android.R.layout.simple_list_item_1,countries);
+
+
+        actv = (AutoCompleteTextView) findViewById(R.id.gpsAutoCompTextView);
+
+        actv.setAdapter(adapter);
+
+
 
         mResultReceiver = new AddressResultReceiver(new Handler());
 

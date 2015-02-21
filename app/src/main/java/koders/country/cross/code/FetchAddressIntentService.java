@@ -121,14 +121,19 @@ public class FetchAddressIntentService extends IntentService {
             // join them, and send them to the thread. The {@link android.location.address}
             // class provides other options for fetching address details that you may prefer
             // to use. Here are some examples:
-            // getLocality() ("Mountain View", for example)
+            ///THIS ONE IS IN USE/// getLocality() ("Mountain View", for example)
             // getAdminArea() ("CA", for example)
             // getPostalCode() ("94043", for example)
             // getCountryCode() ("US", for example)
             // getCountryName() ("United States", for example)
+            /* REMOVED for statement that would normally build the full address.
             for(int i = 0; i < address.getMaxAddressLineIndex(); i++) {
                 addressFragments.add(address.getAddressLine(i));
             }
+            */
+            //getLocality() is used here to get simply the City nearest to the user.
+            addressFragments.add(address.getLocality());
+
             Log.i(TAG, getString(R.string.address_found));
             deliverResultToReceiver(Constants.SUCCESS_RESULT,
                     TextUtils.join(System.getProperty("line.separator"), addressFragments));
