@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.os.ResultReceiver;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -22,6 +23,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationServices;
+
+import koders.country.cross.code.dataapi.ConcreteDataProvider;
+import koders.country.cross.code.dataapi.datatypes.Occupation;
 
 
 public class JobsSelection extends ActionBarActivity implements ConnectionCallbacks, OnConnectionFailedListener {
@@ -78,17 +82,34 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
     Button mFetchAddressButton;
 
 
-    //GPS TextView Data
-    protected String latitude;
-    protected String longitude;
+    //Location Data
+    protected String location;
 
-
+    private ConcreteDataProvider dataLink;
     private AutoCompleteTextView actv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs_selection);
+
+        location = mLocationAddressTextView.toString();
+
+        /**  TRYING to figure out how to pass an Occupation object from one activity to another using Intents.
+        * TODO: determine how to pass an Occupation object, or data from main activity to Jobs
+        */
+        /*
+        Occupation occupationPrimary = new Occupation("5555", "Test", 54);
+
+        Intent intentPrime = new Intent(this, JobsSelection.class);
+        intentPrime.putExtra("Name", Parcelable());
+        Intent intent = getIntent();
+
+        Occupation occupation = intent.getClass();
+
+        dataLink.getInfoLinks(occupation, location);
+        */
 
         String[] countries = getResources().
                 getStringArray(R.array.list_of_cities);

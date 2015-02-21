@@ -20,11 +20,11 @@
     <string name="no_geocoder_available">No geocoder available.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="list_of_cities">
-        <item >Calgary</item>
-        <item >Vancouver</item>
-        <item >Victoria</item>
-        <item >Kingston</item>
-        <item >Toronto</item>
-        <item >Edmonton</item>
+    <item >Calgary</item>
+    <item >Vancouver</item>
+    <item >Victoria</item>
+    <item >Kingston</item>
+    <item >Toronto</item>
+    <item >Edmonton</item>
     </string-array>
 </resources>
