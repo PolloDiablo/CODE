@@ -11,6 +11,10 @@ public class InfoLink {
 
     private final String displayName;
 
+    /**
+     * @param url
+     * @param displayName
+     */
     public InfoLink(final String url, final String displayName) {
         this.url = url;
         this.displayName = displayName;
