@@ -9,10 +9,7 @@ import android.view.View;
 
 
 
-public class MainActivity extends ActionBarActivity implements Interests.OnFragmentInteractionListener, Jobs.OnFragmentInteractionListener {
-
-
-
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +37,5 @@ public class MainActivity extends ActionBarActivity implements Interests.OnFragm
         startActivity(intent);
     }
 
-    /**
-     *Fragment Interactions... not yet implemented.
-     *
-     */
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 
 }
