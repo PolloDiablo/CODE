@@ -27,7 +27,7 @@ public class ConcreteDataProvider implements DataProvider {
     /**
      * @return the data provider singleton to reference.
      */
-    public DataProvider getTheInstance() {
+    public static DataProvider getTheInstance() {
         return THE_INSTANCE;
     }
 
