@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
 
-class CustomAdapter extends ArrayAdapter<String> {
+import koders.country.cross.code.dataapi.datatypes.Occupation;
+import koders.country.cross.code.dataapi.datatypes.Outlook;
+
+class CustomAdapter extends ArrayAdapter<Occupation> {
 
     private static class ViewHolder {
         TextView occupationText;
@@ -19,7 +22,7 @@ class CustomAdapter extends ArrayAdapter<String> {
         TypedArray img;
     }
 
-    CustomAdapter(Context context, int item, ArrayList<String> occupations) {
+    CustomAdapter(Context context, int item, ArrayList<Occupation> occupations) {
         super(context, R.layout.custom_row, occupations);
     }
 
@@ -42,7 +45,7 @@ class CustomAdapter extends ArrayAdapter<String> {
         viewHolder.img = convertView.getResources().obtainTypedArray(R.array.list_of_occupation_icons);
         String[] occupations = convertView.getResources().getStringArray(R.array.list_of_occupations);
 
-        String singleOccupation = getItem(position);
+        Occupation singleOccupation = getItem(position);
 
         /*
         TODO: Should add the icon images to each object in the Occupation Class, currently is referencing: strings.xml
@@ -50,13 +53,28 @@ class CustomAdapter extends ArrayAdapter<String> {
 
         int i;
         for(i=0; i<10; i++){
-            if(occupations[i].equals(singleOccupation)){
+            if(occupations[i].equals(singleOccupation.getDisplayName())){
                 break;
             }
         }
+
         viewHolder.occupationImage.setImageResource(viewHolder.img.getResourceId(i, -1));
-        viewHolder.occupationText.setText(singleOccupation);
-        viewHolder.occupationText.setTextColor(Color.DKGRAY);
+        viewHolder.occupationText.setText(singleOccupation.getDisplayName());
+        switch (singleOccupation.getOutlook() ) {
+            case Surplus:  // Greenish
+                viewHolder.occupationText.setTextColor(Color.rgb(10,200,10));
+                break;
+            case Balance:  // yellowish
+                viewHolder.occupationText.setTextColor(Color.rgb(190,195,42));
+                break;
+            case Shortage:  // Redish
+                viewHolder.occupationText.setTextColor(Color.rgb(200,10,10));
+                break;
+            default:
+                viewHolder.occupationText.setTextColor(Color.DKGRAY);
+                break;
+        }
+
 
 
         return convertView;
