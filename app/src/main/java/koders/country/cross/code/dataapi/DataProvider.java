@@ -22,11 +22,12 @@ public interface DataProvider {
 
     /**
      * @param occupation the occupation code.
-     * @param location   the location proper name/region. (eg. bc). //TODO: narrow down exactly
+     * @param province the location
+     * @param city the location proper name/region. (eg. bc). //TODO: narrow down exactly
      *                   how/what we want the location to be.
      * @return the list of info links.
      */
-    List<InfoLink> getInfoLinks(final Occupation occupation, final String location);
+    List<InfoLink> getInfoLinks(final Occupation occupation, final String province, final String city);
 
 
 }

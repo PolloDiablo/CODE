@@ -12,9 +12,14 @@ public class Occupation implements Comparable<Occupation> {
     private final String displayName;
 
     /**
-     * Some sort of high-low-medium number...<br> TODO: Maybe use an enum instead.
+     * Projected outlook for this occupation.
      */
-    private final double outlook;
+    private final Outlook outlook;
+
+    /**
+     * Informational summary blurb.
+     */
+    private final String blurb;
 
     /**
      * Create from a code and a display name.
@@ -22,11 +27,13 @@ public class Occupation implements Comparable<Occupation> {
      * @param code        the occupation code.
      * @param displayName the name of the occupation.
      * @param outlook     the outlook rating, positive, flat, negative.
+     * @param blurb       the informational blurb/summary.
      */
-    public Occupation(final String code, final String displayName, final double outlook) {
+    public Occupation(final String code, final String displayName, final Outlook outlook, final String blurb) {
         this.code = code;
         this.displayName = displayName;
         this.outlook = outlook;
+        this.blurb = blurb;
     }
 
     public String getCode() {
@@ -37,8 +44,12 @@ public class Occupation implements Comparable<Occupation> {
         return displayName;
     }
 
-    public double getOutlook() {
+    public Outlook getOutlook() {
         return outlook;
+    }
+
+    public String getBlurb() {
+        return blurb;
     }
 
     @Override
@@ -47,6 +58,6 @@ public class Occupation implements Comparable<Occupation> {
             throw new NullPointerException("Invalid argument.");
         }
         //TODO: confirm sort order.
-        return (int) Math.signum(this.outlook - another.outlook);
+        return (int) Math.signum(this.outlook.ordinal() - another.outlook.ordinal());
     }
 }
