@@ -117,7 +117,7 @@ public class MainActivity extends ActionBarActivity {
     // set the state of an Interest as selected or not
     private void setInterestSelected( String interestStr, boolean valToSet ) {
         for (int incr = 0; incr < interestsArrCmb.size(); incr++) {
-            if (((InterestState) interestsArrCmb.get(incr)).getName() == interestStr) {
+            if (((InterestState) interestsArrCmb.get(incr)).getDisplayName() == interestStr) {
                 ((InterestState) interestsArrCmb.get(incr)).setSelected(valToSet);
                 break;
             }
