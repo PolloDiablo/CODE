@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="In demand:"
+        android:text="@string/demand_title"
         android:id="@+id/textView11"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"

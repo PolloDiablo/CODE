@@ -68,6 +68,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="demand_high">High</string>
-    <string name="demand_balance">Balance</string>
+    <string name="demand_balance">Balanced</string>
     <string name="demand_low">Low</string>
+    <string name="demand_title">Demand:</string>
 </resources>
