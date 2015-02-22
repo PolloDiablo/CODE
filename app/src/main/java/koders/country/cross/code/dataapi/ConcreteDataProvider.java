@@ -159,6 +159,16 @@ public class ConcreteDataProvider implements DataProvider {
     }
 
     @Override
+    public Occupation getOccupationByDisplayName(final String displayName) {
+        for(Occupation o:masterList){
+            if(o.getDisplayName().equals(displayName)){
+                return o;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<InfoLink> getInfoLinks(final Occupation occupation, final String province, final String city) {
         List<InfoLink> toReturn = new ArrayList<InfoLink>();
         if (occupation != null && province != null && city != null) {

@@ -21,6 +21,13 @@ public interface DataProvider {
     List<Occupation> getAllOccupations(final List<Interest> interestedIn);
 
     /**
+     * Lookup by the occupation code.
+     * @param displayName of the occupation.
+     * @return the Occupation.
+     */
+    Occupation getOccupationByDisplayName(final String displayName);
+
+    /**
      * @param occupation the occupation code.
      * @param province the location
      * @param city the location proper name/region. (eg. bc). //TODO: narrow down exactly
