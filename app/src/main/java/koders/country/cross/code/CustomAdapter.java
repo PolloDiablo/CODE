@@ -43,6 +43,11 @@ class CustomAdapter extends ArrayAdapter<String> {
         String[] occupations = convertView.getResources().getStringArray(R.array.list_of_occupations);
 
         String singleOccupation = getItem(position);
+
+        /*
+        TODO: Should add the icon images to each object in the Occupation Class, currently is referencing: strings.xml
+         */
+
         int i;
         for(i=0; i<10; i++){
             if(occupations[i].equals(singleOccupation)){
