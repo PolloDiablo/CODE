@@ -181,7 +181,7 @@ public class ConcreteDataProvider implements DataProvider {
                     toReturn.add(new InfoLink("http://vancouvercitycentreesc.ca/job-search-resources/", "VAN - Jobs Resources"));
                     break;
                 case "kingston":
-                    toReturn.add(new InfoLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "KING - Jobs Resources"));
+                    toReturn.add(new InfoLink("https://www.cityofkingston.ca/city-hall/careers", "KING - Jobs Resources"));
                     break;
                 default:
                     //TODO: add in other cities?
