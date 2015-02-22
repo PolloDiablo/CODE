@@ -30,15 +30,27 @@
     <item >Edmonton</item>
     </string-array>
     <string-array name="list_of_occupation_icons">
-        <item>R.drawable.cube</item>
-        <item>R.drawable.cube</item>
-        <item>R.drawable.cube</item>
-        <item>R.drawable.cube</item>
-        <item>R.drawable.cube</item>
-        <item>R.drawable.cube</item>
-        <item>R.drawable.cube</item>
-        <item>R.drawable.cube</item>
-        <item>R.drawable.cube</item>
-        <item>R.drawable.cube</item>
+        <item>@drawable/agriculture</item>
+        <item>@drawable/conference</item>
+        <item>@drawable/dietitian</item>
+        <item>@drawable/financial</item>
+        <item>@drawable/fire</item>
+        <item>@drawable/nurse</item>
+        <item>@drawable/office</item>
+        <item>@drawable/restaurant</item>
+        <item>@drawable/software</item>
+        <item>@drawable/welders</item>
+    </string-array>
+    <string-array name="list_of_occupations">
+        <item>Agriculture And Horticulture Workers</item>
+        <item>Conference and Event Planners</item>
+        <item>Dietitians and Nutritionists</item>
+        <item>Financial Auditors and Accountants</item>
+        <item>Fire-fighters</item>
+        <item>Registered Nurses</item>
+        <item>Office Equipment Operators</item>
+        <item>Restaurant and Food Service Managers</item>
+        <item>Software Engineers</item>
+        <item>Welders and Related Machine Operators</item>
     </string-array>
 </resources>
