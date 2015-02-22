@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import koders.country.cross.code.dataapi.ConcreteDataProvider;
 import koders.country.cross.code.dataapi.DataProvider;
 
-class customAdapter extends ArrayAdapter<String> {
+class CustomAdapter extends ArrayAdapter<String> {
 
     int picsSt[] = {R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube};
     int list;
 
-    customAdapter(Context context, int item, ArrayList<String> occupations) {
+    CustomAdapter(Context context, int item, ArrayList<String> occupations) {
         super(context, R.layout.custom_row, occupations);
         list = item;
         //picsSt = pics;

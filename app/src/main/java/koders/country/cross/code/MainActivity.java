@@ -26,9 +26,9 @@ public class MainActivity extends ActionBarActivity {
 
     private ListView interestsLV;
     private ListView occupationsLV;
-    private interestAdapter interestsArrAd;
+    private InterestAdapter interestsArrAd;
 
-    private customAdapter occupationsArrAd;
+    private CustomAdapter occupationsArrAd;
     private  ArrayList<String> interestsArrStr;
     private  ArrayList<String> occupationsArrStr;
 
@@ -53,7 +53,7 @@ public class MainActivity extends ActionBarActivity {
         for (Interest intR : Interest.values()) {
             interestsArrStr.add(intR.toString());
         }
-        interestsArrAd = new interestAdapter(this, android.R.layout.simple_list_item_checked, interestsArrStr );
+        interestsArrAd = new InterestAdapter(this, android.R.layout.simple_list_item_checked, interestsArrStr );
         interestsLV.setAdapter(interestsArrAd);
 
 
@@ -86,7 +86,7 @@ public class MainActivity extends ActionBarActivity {
         for ( Occupation iterOccup : puff.getAllOccupations( null ) ) {
             occupationsArrStr.add(iterOccup.getDisplayName());
         }
-        occupationsArrAd = new customAdapter(this, android.R.layout.simple_selectable_list_item, occupationsArrStr );
+        occupationsArrAd = new CustomAdapter(this, android.R.layout.simple_selectable_list_item, occupationsArrStr );
 
         occupationsLV.setAdapter( occupationsArrAd );
 

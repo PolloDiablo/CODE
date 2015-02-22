@@ -111,10 +111,12 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jobs_selection);
+
 
         Intent intent = getIntent();
         String occupationname = intent.getStringExtra(MainActivity.TAG);
+        setTitle(occupationname);
+        setContentView(R.layout.activity_jobs_selection);
         current = dataLink.getOccupationByDisplayName(occupationname);
         ail = dataLink.getInfoLinks(current, province, city);
 

@@ -16,11 +16,13 @@ import koders.country.cross.code.dataapi.DataProvider;
 
 import static koders.country.cross.code.R.id.checkedTextView;
 
-class interestAdapter extends ArrayAdapter<String> {
+class InterestAdapter extends ArrayAdapter<String> {
+
+
 
     int list;
 
-    interestAdapter(Context context, int item, ArrayList<String> occupations) {
+    InterestAdapter(Context context, int item, ArrayList<String> occupations) {
         super(context, R.layout.interest_row, occupations);
         list = item;
         //picsSt = pics;
@@ -31,24 +33,31 @@ class interestAdapter extends ArrayAdapter<String> {
         return true;
     }
 
+    private static class ViewHolder{
+        CheckedTextView lukesText;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-
-
-        LayoutInflater lukesInflater = LayoutInflater.from(getContext());
-        View customView = lukesInflater.inflate(R.layout.interest_row, parent, false);
-
+        ViewHolder viewHolder;
+        if(convertView == null){
+            viewHolder = new ViewHolder();
+            LayoutInflater lukesInflater = LayoutInflater.from(getContext());
+            convertView = lukesInflater.inflate(R.layout.interest_row, parent, false);
+            viewHolder.lukesText = (CheckedTextView) convertView.findViewById(checkedTextView);
+            convertView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
 
        //  CheckBox chk = (CheckBox) customView.fin// findViewById(R.id.checkedTextView);
 
         String singleOccupation = getItem(position);
 
-        CheckedTextView lukesText = (CheckedTextView) customView.findViewById(checkedTextView);
+        viewHolder.lukesText.setText(singleOccupation);
+        viewHolder.lukesText.setTextColor(Color.DKGRAY);
 
-        lukesText.setText(singleOccupation);
-        lukesText.setTextColor(Color.DKGRAY);
-
-        return customView;
+        return convertView;
     }
 }
