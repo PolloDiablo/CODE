@@ -129,6 +129,10 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
         lv = (ListView)findViewById(R.id.jobDetailsView );
 
         ila = new InfoLinkAdapter(getApplicationContext(), android.R.layout.simple_selectable_list_item, ail );
+        String[] countries = getResources().
+                getStringArray(R.array.list_of_cities);
+        ArrayAdapter adapter = new ArrayAdapter<>
+                (this,android.R.layout.simple_list_item_1,countries);
 
         lv.setAdapter( ila );
 
@@ -147,7 +151,7 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
 
         actv = (AutoCompleteTextView) findViewById(R.id.gpsAutoCompTextView);
 
-        //actv.setAdapter(adapter);
+        actv.setAdapter(adapter);
 
         mResultReceiver = new AddressResultReceiver(new Handler());
 

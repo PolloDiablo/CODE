@@ -17,8 +17,6 @@ import koders.country.cross.code.dataapi.datatypes.InfoLink;
 
 class InfoLinkAdapter extends ArrayAdapter<InfoLink> {
 
-    protected int list;
-
     private static class ViewHolder {
         TextView urlTitle;
         TextView urlText;
@@ -26,7 +24,6 @@ class InfoLinkAdapter extends ArrayAdapter<InfoLink> {
 
     InfoLinkAdapter(Context context, int item, List<InfoLink> infoLinks) {
         super(context, R.layout.infolink_row, infoLinks);
-        list = item;
     }
 
     @Override

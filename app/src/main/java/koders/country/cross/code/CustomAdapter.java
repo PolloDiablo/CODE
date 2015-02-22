@@ -1,6 +1,7 @@
 package koders.country.cross.code;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,35 +10,55 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
-import koders.country.cross.code.dataapi.ConcreteDataProvider;
-import koders.country.cross.code.dataapi.DataProvider;
 
 class CustomAdapter extends ArrayAdapter<String> {
 
-    int picsSt[] = {R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube,R.drawable.cube};
-    int list;
+    private static class ViewHolder {
+        TextView occupationText;
+        ImageView occupationImage;
+        TypedArray img;
+    }
 
     CustomAdapter(Context context, int item, ArrayList<String> occupations) {
         super(context, R.layout.custom_row, occupations);
-        list = item;
-        //picsSt = pics;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater lukesInflater = LayoutInflater.from(getContext());
-        View customView = lukesInflater.inflate(R.layout.custom_row, parent, false);
+
+        ViewHolder viewHolder;
+
+        if(convertView == null) {
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.custom_row, parent, false);
+            viewHolder.occupationText = (TextView) convertView.findViewById(R.id.arrayText);
+            viewHolder.occupationImage = (ImageView) convertView.findViewById(R.id.arrayImage);
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        viewHolder.img = convertView.getResources().obtainTypedArray(R.array.list_of_occupation_icons);
+        String[] occupations = convertView.getResources().getStringArray(R.array.list_of_occupations);
 
         String singleOccupation = getItem(position);
 
-        TextView lukesText = (TextView) customView.findViewById(R.id.arrayText);
-        ImageView lukesImage = (ImageView) customView.findViewById(R.id.arrayImage);
+        /*
+        TODO: Should add the icon images to each object in the Occupation Class, currently is referencing: strings.xml
+         */
 
-        lukesText.setText(singleOccupation);
-        lukesText.setTextColor(Color.DKGRAY);
+        int i;
+        for(i=0; i<10; i++){
+            if(occupations[i].equals(singleOccupation)){
+                break;
+            }
+        }
+        viewHolder.occupationImage.setImageResource(viewHolder.img.getResourceId(i, -1));
+        viewHolder.occupationText.setText(singleOccupation);
+        viewHolder.occupationText.setTextColor(Color.DKGRAY);
 
-        lukesImage.setImageResource(picsSt[position]);
 
-        return customView;
+        return convertView;
     }
 }

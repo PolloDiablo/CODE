@@ -3,11 +3,13 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>         is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div> -->
+
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/arrayImage"
-        android:src="@drawable/cube"
+        android:src="@drawable/agriculture"
         android:layout_margin="5dp"
         android:nestedScrollingEnabled="true" />
 
