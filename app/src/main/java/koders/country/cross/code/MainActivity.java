@@ -104,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         // String occupation = String.valueOf(parent.getItemAtPosition(position));
                         // Toast.makeText(MainActivity.this, occupation, Toast.LENGTH_SHORT).show();
-                        String theJobName = interestsArrAd.getItem( position );
+                        String theJobName = occupationsArrAd.getItem( position );
                         // need to use this to get at our Job information ...
                         submitJobSelections( view, theJobName );
                     }
