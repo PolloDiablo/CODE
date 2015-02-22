@@ -73,7 +73,7 @@ public class MainActivity extends ActionBarActivity {
                 long selectedItems[] = interestsLV.getCheckedItemIds();
                 List<Interest> selectedList = new ArrayList<>();
                 for( int zot=0 ; (zot < selectedItems.length) ; zot++ ) {
-                    selectedList.add( Interest.valueOf(((InterestState)interestsArrCmb.get(zot)).getName() ));
+                    selectedList.add( Interest.valueOf(((InterestState)interestsArrCmb.get((int)selectedItems[zot])).getName() ));
                 }
                 updateTheOccupationsStringArray( selectedList );
             }
