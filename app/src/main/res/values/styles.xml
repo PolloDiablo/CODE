@@ -37,4 +37,6 @@
     <color name="canada_colour">#EFB43939</color>
     <color name="black">#FF343434</color>
     <color name="darker_black">#FF131313</color>
+    <color name="background_colour">#FFefefef</color>
+
 </resources>
