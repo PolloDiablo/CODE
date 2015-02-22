@@ -148,8 +148,10 @@ public class ConcreteDataProvider implements DataProvider {
     @Override
     public List<Occupation> getAllOccupations(List<Interest> interestedIn) {
         Set<Occupation> accumulate = new HashSet<Occupation>();
-        for (Interest inter : interestedIn) {
-            accumulate.addAll(interestLookup.get(inter));
+        if(interestedIn!=null) {
+            for (Interest inter : interestedIn) {
+                accumulate.addAll(interestLookup.get(inter));
+            }
         }
         List<Occupation> toReturn = new ArrayList<Occupation>();
         toReturn.addAll(accumulate);
