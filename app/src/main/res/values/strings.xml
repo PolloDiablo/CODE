@@ -53,4 +53,7 @@
         <item>Software Engineers</item>
         <item>Welders and Related Machine Operators</item>
     </string-array>
+    <string name="title_activity_web_view">WebViewActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

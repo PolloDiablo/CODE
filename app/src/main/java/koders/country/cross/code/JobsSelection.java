@@ -56,11 +56,10 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
 
     /**
      * Tracks whether the user has requested an address. Becomes true when the user requests an
-     * address and false when the address (or an error message) is delivered.
-     * The user requests an address by pressing the Fetch Address button. This may happen
-     * before GoogleApiClient connects. This activity uses this boolean to keep track of the
-     * user's intent. If the value is true, the activity tries to fetch the address as soon as
-     * GoogleApiClient connects.
+     * address and false when the address (or an error message) is delivered. The user requests an
+     * address by pressing the Fetch Address button. This may happen before GoogleApiClient
+     * connects. This activity uses this boolean to keep track of the user's intent. If the value is
+     * true, the activity tries to fetch the address as soon as GoogleApiClient connects.
      */
     protected boolean mAddressRequested;
 
@@ -102,10 +101,9 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
     private ListView lv;
     private List<InfoLink> ail;
     private InfoLinkAdapter ila;
-    
+
 
     private DataProvider dataLink = ConcreteDataProvider.getTheInstance();
-
 
 
     @Override
@@ -126,15 +124,15 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
         od.setText(current.getBlurb() + "Nothing to see here...");
 
 
-        lv = (ListView)findViewById(R.id.jobDetailsView );
+        lv = (ListView) findViewById(R.id.jobDetailsView);
 
-        ila = new InfoLinkAdapter(getApplicationContext(), android.R.layout.simple_selectable_list_item, ail );
+        ila = new InfoLinkAdapter(getApplicationContext(), android.R.layout.simple_selectable_list_item, ail);
         String[] countries = getResources().
                 getStringArray(R.array.list_of_cities);
         ArrayAdapter adapter = new ArrayAdapter<>
-                (this,android.R.layout.simple_list_item_1,countries);
+                (this, android.R.layout.simple_list_item_1, countries);
 
-        lv.setAdapter( ila );
+        lv.setAdapter(ila);
 
         lv.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -171,15 +169,22 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
     }
 
     public void goToUrl(String url) {
-
-        //Create intent for Jobs Selection Activity
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-
-        //Add Data to Activity intent
-        intent.setData(Uri.parse(url));
-
-        //Initiate Transfer
-        startActivity(intent);
+        if (url != null) {
+            final Intent intent;
+            //This site we need to redirect via our desktop webview.
+            if (url.contains("report-eng.do")) {
+                //Launch via our own browser. (which will cause a redirect).
+                intent = new Intent(this, WebViewActivity.class);
+                intent.putExtra("moose", url);
+            } else {
+                //Create intent for general browser launch
+                intent = new Intent(Intent.ACTION_VIEW);
+                //Add Data to Activity intent
+                intent.setData(Uri.parse(url));
+            }
+            //Initiate Transfer
+            startActivity(intent);
+        }
     }
 
 
@@ -187,6 +192,7 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
      * Runs when user clicks the Fetch Address button. Starts the service to fetch the address if
      * GoogleApiClient is connected.
      */
+
     public void fetchAddressButtonHandler(View view) {
         // We only start the service to fetch the address if GoogleApiClient is connected.
         if (mGoogleApiClient.isConnected() && mLastLocation != null) {
@@ -268,7 +274,6 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
             }
         }
     }
-
 
 
     /**
