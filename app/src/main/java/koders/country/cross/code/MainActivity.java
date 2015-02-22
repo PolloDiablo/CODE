@@ -32,6 +32,8 @@ import koders.country.cross.code.dataapi.datatypes.Occupation;
 import koders.country.cross.code.interestAdapter;
 import koders.country.cross.code.customAdapter;
 
+import static koders.country.cross.code.R.id.checkedTextView;
+
 public class MainActivity extends ActionBarActivity {
 
     private List<Occupation> theOccupations;
@@ -78,6 +80,10 @@ public class MainActivity extends ActionBarActivity {
                 // this is not needed because the state is maintained (at least for now)
                 // although there are comments about this flaking out of the list row scrolls out of view ... that is just dumb
                 // interestsLV.setItemChecked( position, !interestsLV.isItemChecked(position));
+                CheckedTextView lukesText = (CheckedTextView) view.findViewById(checkedTextView);
+
+                lukesText.setChecked( val );
+
                 boolean stable = interestsArrAd.hasStableIds();
                 int zotto = interestsLV.getCheckedItemCount();
                 long selectedItems[] = interestsLV.getCheckedItemIds();

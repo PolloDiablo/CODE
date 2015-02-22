@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import koders.country.cross.code.dataapi.ConcreteDataProvider;
 import koders.country.cross.code.dataapi.DataProvider;
+
+import static koders.country.cross.code.R.id.checkedTextView;
 
 class interestAdapter extends ArrayAdapter<String> {
 
@@ -30,12 +33,18 @@ class interestAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+
+
         LayoutInflater lukesInflater = LayoutInflater.from(getContext());
         View customView = lukesInflater.inflate(R.layout.interest_row, parent, false);
 
+
+       //  CheckBox chk = (CheckBox) customView.fin// findViewById(R.id.checkedTextView);
+
         String singleOccupation = getItem(position);
 
-        CheckedTextView lukesText = (CheckedTextView) customView.findViewById(R.id.checkedTextView);
+        CheckedTextView lukesText = (CheckedTextView) customView.findViewById(checkedTextView);
 
         lukesText.setText(singleOccupation);
         lukesText.setTextColor(Color.LTGRAY);
