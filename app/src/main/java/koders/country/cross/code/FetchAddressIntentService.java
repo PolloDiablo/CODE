@@ -134,7 +134,8 @@ public class FetchAddressIntentService extends IntentService {
             }
             */
             //getLocality() is used here to get simply the City nearest to the user.
-            addressFragments.add(address.getLocality());
+            addressFragments.add(address.getLocality()+ ", " + address.getAdminArea());
+
 
             Log.i(TAG, getString(R.string.address_found));
             deliverResultToReceiver(Constants.SUCCESS_RESULT,

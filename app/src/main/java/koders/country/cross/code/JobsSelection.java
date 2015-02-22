@@ -3,6 +3,7 @@ package koders.country.cross.code;
 import android.content.Intent;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.os.ResultReceiver;
@@ -10,9 +11,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,7 +27,12 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationServices;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import koders.country.cross.code.dataapi.ConcreteDataProvider;
+import koders.country.cross.code.dataapi.DataProvider;
+import koders.country.cross.code.dataapi.datatypes.InfoLink;
 import koders.country.cross.code.dataapi.datatypes.Occupation;
 
 
@@ -69,7 +77,7 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
     /**
      * Displays the location address.
      */
-    protected TextView mLocationAddressTextView;
+    protected AutoCompleteTextView actv;
 
     /**
      * Visible while the address is being fetched.
@@ -83,10 +91,21 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
 
 
     //Location Data
-    protected String location;
+    protected String province = "Ontario";
+    protected String city = "Kingston";
 
-    private ConcreteDataProvider dataLink;
-    private AutoCompleteTextView actv;
+    //TextView object to display Occupation Details
+    protected TextView od;
+
+    //Occupation Object
+    protected Occupation current;
+    private ListView lv;
+    private List<InfoLink> ail;
+    private InfoLinkAdapter ila;
+    
+
+    private DataProvider dataLink = ConcreteDataProvider.getTheInstance();
+
 
 
     @Override
@@ -94,39 +113,42 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs_selection);
 
-
-        /**  TRYING to figure out how to pass an Occupation object from one activity to another using Intents.
-        * TODO: determine how to pass an Occupation object, or data from main activity to Jobs
-        */
-        /*
-        location = mLocationAddressTextView.toString();
-
-        Occupation occupationPrimary = new Occupation("5555", "Test", 54);
-
-        Intent intentPrime = new Intent(this, JobsSelection.class);
-        intentPrime.putExtra("Name", Parcelable());
         Intent intent = getIntent();
+        String occupationname = intent.getStringExtra(MainActivity.TAG);
+        current = dataLink.getOccupationByDisplayName(occupationname);
+        ail = dataLink.getInfoLinks(current, province, city);
 
-        Occupation occupation = intent.getClass();
 
-        dataLink.getInfoLinks(occupation, location);
-        */
+        od = (TextView) findViewById(R.id.textView5);
+        //getBlurb does not yet return any information
+        od.setText(current.getBlurb() + "Nothing to see here...");
 
-        String[] countries = getResources().
-                getStringArray(R.array.list_of_cities);
-        ArrayAdapter adapter = new ArrayAdapter
-                (this,android.R.layout.simple_list_item_1,countries);
 
+        lv = (ListView)findViewById(R.id.jobDetailsView );
+
+        ila = new InfoLinkAdapter(getApplicationContext(), android.R.layout.simple_selectable_list_item, ail );
+
+        lv.setAdapter( ila );
+
+        lv.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        // String occupation = String.valueOf(parent.getItemAtPosition(position));
+                        // Toast.makeText(MainActivity.this, occupation, Toast.LENGTH_SHORT).show();
+                        String theJobName = ila.getItem(position).getUrl();
+                        // need to use this to get at our Job information ...
+                        goToUrl(theJobName);
+                    }
+                }
+        );
 
         actv = (AutoCompleteTextView) findViewById(R.id.gpsAutoCompTextView);
 
-        actv.setAdapter(adapter);
-
-
+        //actv.setAdapter(adapter);
 
         mResultReceiver = new AddressResultReceiver(new Handler());
 
-        mLocationAddressTextView = (TextView) findViewById(R.id.gpsAutoCompTextView);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mFetchAddressButton = (Button) findViewById(R.id.gpsButton);
 
@@ -139,6 +161,19 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
 
         buildGoogleApiClient();
 
+
+    }
+
+    public void goToUrl(String url) {
+
+        //Create intent for Jobs Selection Activity
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+
+        //Add Data to Activity intent
+        intent.setData(Uri.parse(url));
+
+        //Initiate Transfer
+        startActivity(intent);
     }
 
 
@@ -270,7 +305,7 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
      * Updates the address in the UI.
      */
     protected void displayAddressOutput() {
-        mLocationAddressTextView.setText(mAddressOutput);
+        actv.setText(mAddressOutput);
     }
 
     /**

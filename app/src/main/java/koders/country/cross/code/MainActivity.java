@@ -1,40 +1,26 @@
 package koders.country.cross.code;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.CheckedTextView;
-import android.widget.ListAdapter;
-import android.widget.ScrollView;
-import android.widget.LinearLayout;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.EditText;
 import android.widget.CheckBox;
-import android.widget.ListView;
 import android.widget.CheckedTextView;
-import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.BaseAdapter;
-import android.widget.Toast;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import koders.country.cross.code.dataapi.ConcreteDataProvider;
 import koders.country.cross.code.dataapi.DataProvider;
 import koders.country.cross.code.dataapi.datatypes.Interest;
 import koders.country.cross.code.dataapi.datatypes.Occupation;
-import koders.country.cross.code.interestAdapter;
-import koders.country.cross.code.customAdapter;
 
 import static koders.country.cross.code.R.id.checkedTextView;
 
 public class MainActivity extends ActionBarActivity {
+
+    protected static final String TAG = "occupation_name";
 
     private List<Occupation> theOccupations;
 
@@ -110,9 +96,9 @@ public class MainActivity extends ActionBarActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         // String occupation = String.valueOf(parent.getItemAtPosition(position));
                         // Toast.makeText(MainActivity.this, occupation, Toast.LENGTH_SHORT).show();
-                        String theJobName = occupationsArrAd.getItem( position );
+                        String theJobName = occupationsArrAd.getItem(position);
                         // need to use this to get at our Job information ...
-                        submitJobSelections( view, theJobName );
+                        submitJobSelections(view, theJobName);
                     }
                 }
         );
@@ -136,11 +122,8 @@ public class MainActivity extends ActionBarActivity {
         //Create intent for Jobs Selection Activity
         Intent intent = new Intent(this, JobsSelection.class);
 
-        // TODO:  need to put over the JobName at the very least
-
         //Add Data to Activity intent
-        //intent.putExtra(LAT, latitude);
-        //intent.putExtra(LONG, longitude);
+        intent.putExtra(TAG, theJobName);
 
         //Initiate Transfer
         startActivity(intent);

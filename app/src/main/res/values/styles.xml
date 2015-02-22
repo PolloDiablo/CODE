@@ -4,24 +4,37 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
 
-        <item name="android:windowBackground">@color/canada_colour</item>
-        
+        <item name="android:color">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:editTextColor">@color/black</item>
         <item name="android:listViewStyle">@style/ListViewStyle</item>
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <item name="android:popupBackground">#0FFF</item>
     </style>
 
     <style name="TextViewStyle" parent="android:style/Widget.TextView">
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
-        <item name="android:textColor">@color/text_list_colour</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="TextViewStyle2" parent="android:style/Widget.TextView">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/darker_black</item>
     </style>
 
     <style name="ListViewStyle" parent="android:style/Widget.ListView">
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/bg_list_colour</item>
-        <item name="android:textColorPrimary">@color/text_list_colour</item>
+        <item name="android:textColor">@color/black</item>
+
+    </style>
+
+    <style name="textView2">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/darker_black</item>
     </style>
 
     <color name="bg_list_colour">#fe54834f</color>
     <color name="text_list_colour">#FF000000</color>
-    <color name="canada_colour">#FFB43939</color>
-
+    <color name="canada_colour">#EFB43939</color>
+    <color name="black">#FF343434</color>
+    <color name="darker_black">#FF131313</color>
 </resources>

@@ -47,7 +47,7 @@ class interestAdapter extends ArrayAdapter<String> {
         CheckedTextView lukesText = (CheckedTextView) customView.findViewById(checkedTextView);
 
         lukesText.setText(singleOccupation);
-        lukesText.setTextColor(Color.LTGRAY);
+        lukesText.setTextColor(Color.DKGRAY);
 
         return customView;
     }

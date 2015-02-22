@@ -34,7 +34,7 @@ class customAdapter extends ArrayAdapter<String> {
         ImageView lukesImage = (ImageView) customView.findViewById(R.id.arrayImage);
 
         lukesText.setText(singleOccupation);
-        lukesText.setTextColor(Color.LTGRAY);
+        lukesText.setTextColor(Color.DKGRAY);
 
         lukesImage.setImageResource(picsSt[position]);
 
