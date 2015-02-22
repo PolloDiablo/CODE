@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.ArrayList;
 import koders.country.cross.code.dataapi.ConcreteDataProvider;
 import koders.country.cross.code.dataapi.DataProvider;
+import koders.country.cross.code.dataapi.InterestState;
 import koders.country.cross.code.dataapi.datatypes.Interest;
 import koders.country.cross.code.dataapi.datatypes.Occupation;
 
@@ -29,7 +30,8 @@ public class MainActivity extends ActionBarActivity {
     private InterestAdapter interestsArrAd;
 
     private CustomAdapter occupationsArrAd;
-    private  ArrayList<String> interestsArrStr;
+    private List<InterestState> interestsArrCmb = new ArrayList<InterestState>();
+
     private  ArrayList<String> occupationsArrStr;
 
     CheckBox[] cb = new CheckBox[6];
@@ -49,11 +51,8 @@ public class MainActivity extends ActionBarActivity {
         DataProvider puff = ConcreteDataProvider.getTheInstance();
 
         interestsLV = (ListView) findViewById( R.id.InterestslistView );
-        interestsArrStr = new ArrayList<>();
-        for (Interest intR : Interest.values()) {
-            interestsArrStr.add(intR.toString());
-        }
-        interestsArrAd = new InterestAdapter(this, android.R.layout.simple_list_item_checked, interestsArrStr );
+        loadInterestsInfo();
+        interestsArrAd = new InterestAdapter(this, android.R.layout.simple_list_item_checked, interestsArrCmb );
         interestsLV.setAdapter(interestsArrAd);
 
 
@@ -68,14 +67,13 @@ public class MainActivity extends ActionBarActivity {
                 // interestsLV.setItemChecked( position, !interestsLV.isItemChecked(position));
                 CheckedTextView lukesText = (CheckedTextView) view.findViewById(checkedTextView);
 
+                setInterestSelected( lukesText.getText().toString(), val );
                 lukesText.setChecked( val );
 
-                boolean stable = interestsArrAd.hasStableIds();
-                int zotto = interestsLV.getCheckedItemCount();
                 long selectedItems[] = interestsLV.getCheckedItemIds();
                 List<Interest> selectedList = new ArrayList<>();
                 for( int zot=0 ; (zot < selectedItems.length) ; zot++ ) {
-                    selectedList.add( Interest.valueOf(interestsArrStr.get(zot)) );
+                    selectedList.add( Interest.valueOf(((InterestState)interestsArrCmb.get(zot)).getName() ));
                 }
                 updateTheOccupationsStringArray( selectedList );
             }
@@ -103,6 +101,20 @@ public class MainActivity extends ActionBarActivity {
                 }
         );
 
+    }
+
+    private void loadInterestsInfo() {
+        for (Interest intR : Interest.values()) {
+            interestsArrCmb.add(new InterestState( intR.toString()));
+        }
+    }
+    private void setInterestSelected( String interestStr, boolean valToSet ) {
+        for (int incr = 0; incr < interestsArrCmb.size(); incr++) {
+            if (((InterestState) interestsArrCmb.get(incr)).getName() == interestStr) {
+                ((InterestState) interestsArrCmb.get(incr)).setSelected(valToSet);
+                break;
+            }
+        }
     }
 
     private void updateTheOccupationsStringArray(List<Interest> inInterests ) {
