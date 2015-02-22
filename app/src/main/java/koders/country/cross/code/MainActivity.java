@@ -111,7 +111,7 @@ public class MainActivity extends ActionBarActivity {
     // just sets up our Interest information for tracking Selections
     private void loadInterestsInfo() {
         for (Interest intR : Interest.values()) {
-            interestsArrCmb.add(new InterestState( intR.getDisplayName()));
+            interestsArrCmb.add(new InterestState( intR.toString(), intR ));
         }
     }
     // set the state of an Interest as selected or not

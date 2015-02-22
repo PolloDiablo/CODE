@@ -86,7 +86,7 @@ class InterestAdapter extends ArrayAdapter<InterestState> {
 
         viewHolder.lukesText.setChecked(thisItem.isSelected());
 
-        viewHolder.lukesText.setText(thisItem.getName());
+        viewHolder.lukesText.setText(thisItem.getDisplayName());
         viewHolder.lukesText.setTextColor(Color.DKGRAY);
 
         return convertView;
