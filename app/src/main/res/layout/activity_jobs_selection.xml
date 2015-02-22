@@ -115,7 +115,6 @@
             android:id="@+id/textView5"
             android:minHeight="70dp"
             android:text="@string/occupation_info"
-            android:layout_below="@+id/textView3"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:background="@color/background_colour"
