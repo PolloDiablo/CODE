@@ -11,10 +11,13 @@
         android:layout_height="wrap_content"
         android:text="@string/location_TextField"
         android:id="@+id/gpsAutoCompTextView"
-        android:minWidth="280dp"
+        android:minWidth="240dp"
+        android:inputType="text"
+        android:imeOptions="actionGo"
         android:layout_alignBottom="@+id/gpsButton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -32,11 +35,11 @@
         android:layout_height="wrap_content"
         android:text="@string/location_header"
         android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
+        style="@style/textView2"
+        android:layout_below="@+id/textView5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="0dp"
-        style="@style/textView2" />
+        android:layout_marginTop="15dp" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleSmall"
@@ -57,7 +60,8 @@
         android:clickable="false"
         android:layout_below="@+id/textView4"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,7 +69,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/occupation_info_title"
         android:id="@+id/textView3"
-        android:layout_below="@+id/gpsAutoCompTextView"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -75,22 +79,29 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/web_links_title"
         android:id="@+id/textView4"
-        android:layout_below="@+id/textView5"
+        android:layout_below="@+id/gpsAutoCompTextView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/textView5"
+        android:minHeight="70dp"
+        android:text="@string/occupation_info"
         android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:minHeight="130dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="2dp"
-        android:text="@string/occupation_info" />
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/flagImageView"
+        android:src="@drawable/ontario"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
