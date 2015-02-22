@@ -24,6 +24,11 @@ class interestAdapter extends ArrayAdapter<String> {
     }
 
     @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater lukesInflater = LayoutInflater.from(getContext());
         View customView = lukesInflater.inflate(R.layout.interest_row, parent, false);
