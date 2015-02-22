@@ -133,14 +133,14 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
 
         ColorDrawable colorDrawable;
         switch (current.getOutlook() ) {
-            case Surplus:  // Greenish
-                colorDrawable  = new ColorDrawable( Color.rgb(10, 200, 10) );
+            case Surplus:  // Redish
+                colorDrawable  = new ColorDrawable( Color.rgb(200,10,10) );
                 break;
             case Balance:  // yellowish
                 colorDrawable  = new ColorDrawable( Color.rgb(190,195,42));
                 break;
-            case Shortage:  // Redish
-                colorDrawable  = new ColorDrawable( Color.rgb(200,10,10));
+            case Shortage:  // Greenish
+                colorDrawable  = new ColorDrawable( Color.rgb(10, 200, 10));
                 break;
             default:
                 colorDrawable  = new ColorDrawable( Color.DKGRAY);

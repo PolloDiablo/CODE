@@ -34,9 +34,11 @@
 
     <color name="bg_list_colour">#fe54834f</color>
     <color name="text_list_colour">#FF000000</color>
-    <color name="canada_colour">#EFB43939</color>
+    <color name="background_container_colour">#EFB43939</color>
     <color name="black">#FF343434</color>
     <color name="darker_black">#FF131313</color>
     <color name="background_colour">#FFefefef</color>
+    <color name="canada_colour">#EFB43939</color>
+    <color name="red_colour">#ffc80a0a</color>
 
 </resources>

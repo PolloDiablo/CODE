@@ -61,14 +61,14 @@ class CustomAdapter extends ArrayAdapter<Occupation> {
         viewHolder.occupationImage.setImageResource(viewHolder.img.getResourceId(i, -1));
         viewHolder.occupationText.setText(singleOccupation.getDisplayName());
         switch (singleOccupation.getOutlook() ) {
-            case Surplus:  // Greenish
-                viewHolder.occupationText.setTextColor(Color.rgb(10,200,10));
+            case Surplus:  // Redish
+                viewHolder.occupationText.setTextColor(Color.rgb(200,10,10));
                 break;
             case Balance:  // yellowish
                 viewHolder.occupationText.setTextColor(Color.rgb(190,195,42));
                 break;
-            case Shortage:  // Redish
-                viewHolder.occupationText.setTextColor(Color.rgb(200,10,10));
+            case Shortage:  // Greenish
+                viewHolder.occupationText.setTextColor(Color.rgb(10,200,10));
                 break;
             default:
                 viewHolder.occupationText.setTextColor(Color.DKGRAY);

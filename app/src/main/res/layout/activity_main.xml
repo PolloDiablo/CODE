@@ -37,7 +37,7 @@
         android:clickable="false"
         android:layout_marginTop="3dp"
         android:layout_marginBottom="5dp"
-        android:background="@color/canada_colour"
+        android:background="@color/background_container_colour"
         android:padding="2dp" />
 
     <ListView
@@ -49,7 +49,7 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/textView8"
         android:padding="2dp"
-        android:background="@color/canada_colour"
+        android:background="@color/background_container_colour"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="3dp" />
 
@@ -57,41 +57,56 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Shortage"
+        android:text="@string/demand_high"
         android:id="@+id/textView8"
         android:background="#ff0ac80a"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/textView9"
-        android:layout_toStartOf="@+id/textView9"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
-        android:padding="2dp" />
+        android:padding="2dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="19dp"
+        android:layout_alignBaseline="@+id/textView9"
+        android:layout_alignBottom="@+id/textView9"
+        android:layout_toRightOf="@+id/textView11"
+        android:layout_toEndOf="@+id/textView11" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Balance"
+        android:text="@string/demand_balance"
         android:id="@+id/textView9"
         android:background="#ffbec32a"
         android:layout_gravity="center|right"
+        android:padding="2dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:padding="2dp" />
+        android:layout_toRightOf="@+id/textView8"
+        android:layout_toEndOf="@+id/textView8"
+        android:layout_marginLeft="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Surplus"
+        android:text="@string/demand_low"
         android:id="@+id/textView10"
         android:singleLine="true"
         android:background="#ffc80a0a"
+        android:padding="2dp"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/textView9"
         android:layout_toEndOf="@+id/textView9"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="37dp"
-        android:padding="2dp" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="11dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="In demand:"
+        android:id="@+id/textView11"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="2dp" />
 
 </RelativeLayout>
