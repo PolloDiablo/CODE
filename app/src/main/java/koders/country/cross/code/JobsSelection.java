@@ -1,22 +1,28 @@
 package koders.country.cross.code;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.os.ResultReceiver;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,8 +33,8 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationServices;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import koders.country.cross.code.dataapi.ConcreteDataProvider;
 import koders.country.cross.code.dataapi.DataProvider;
@@ -98,9 +104,15 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
 
     //Occupation Object
     protected Occupation current;
+
+    //Objects to update and do things with
+    private ImageView imageView;
     private ListView lv;
     private List<InfoLink> ail;
     private InfoLinkAdapter ila;
+    private String[] provinces;
+    private TypedArray img;
+    
 
 
     private DataProvider dataLink = ConcreteDataProvider.getTheInstance();
@@ -114,45 +126,134 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
         Intent intent = getIntent();
         String occupationname = intent.getStringExtra(MainActivity.TAG);
         setTitle(occupationname);
+
+
         setContentView(R.layout.activity_jobs_selection);
         current = dataLink.getOccupationByDisplayName(occupationname);
+
+        ColorDrawable colorDrawable;
+        switch (current.getOutlook() ) {
+            case Surplus:  // Greenish
+                colorDrawable  = new ColorDrawable( Color.rgb(10, 200, 10) );
+                break;
+            case Balance:  // yellowish
+                colorDrawable  = new ColorDrawable( Color.rgb(190,195,42));
+                break;
+            case Shortage:  // Redish
+                colorDrawable  = new ColorDrawable( Color.rgb(200,10,10));
+                break;
+            default:
+                colorDrawable  = new ColorDrawable( Color.DKGRAY);
+                break;
+        }
+        getSupportActionBar().setBackgroundDrawable(colorDrawable);
+
+        //Display job Blurb information
+        od = (TextView) findViewById(R.id.textView5);
+        od.setText(current.getBlurb());
+
+        lv = (ListView)findViewById(R.id.jobDetailsView );
+
+        updateLocation("Kingston, Ontario");
+        /* REPLACED WITH METHOD Call above
+        //Get InfoLinks for location
         ail = dataLink.getInfoLinks(current, province, city);
 
 
-        od = (TextView) findViewById(R.id.textView5);
-        //getBlurb does not yet return any information
-        od.setText(current.getBlurb() + "Nothing to see here...");
+        lv = (ListView)findViewById(R.id.jobDetailsView );
 
+        ila = new InfoLinkAdapter(getApplicationContext(), android.R.layout.simple_selectable_list_item, ail );
+        //Set Display
+        lv.setAdapter( ila );
+        */
 
-        lv = (ListView) findViewById(R.id.jobDetailsView);
-
-        ila = new InfoLinkAdapter(getApplicationContext(), android.R.layout.simple_selectable_list_item, ail);
-        String[] countries = getResources().
-                getStringArray(R.array.list_of_cities);
-        ArrayAdapter adapter = new ArrayAdapter<>
-                (this, android.R.layout.simple_list_item_1, countries);
-
-        lv.setAdapter(ila);
 
         lv.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        // String occupation = String.valueOf(parent.getItemAtPosition(position));
-                        // Toast.makeText(MainActivity.this, occupation, Toast.LENGTH_SHORT).show();
-                        String theJobName = ila.getItem(position).getUrl();
-                        // need to use this to get at our Job information ...
-                        goToUrl(theJobName);
-                    }
+            new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    String theJobName = ila.getItem(position).getUrl();
+                    goToUrl(theJobName);
                 }
+            }
         );
 
         actv = (AutoCompleteTextView) findViewById(R.id.gpsAutoCompTextView);
 
+        //Get City, Province auto-complete strings
+        String[] countries = getResources().getStringArray(R.array.list_of_cities);
+        ArrayAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,countries);
+
         actv.setAdapter(adapter);
+        ail = dataLink.getInfoLinks(current, province, city);
+
+        ila = new InfoLinkAdapter(getApplicationContext(), android.R.layout.simple_selectable_list_item, ail );
+        //Set Display
+        lv.setAdapter( ila );
+
+        actv.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
+
+                        String item = String.valueOf(parent.getItemAtPosition(pos));
+                        if(item != null){
+                            //Add call to regenerate ListView
+                            updateLocation(item);
+                        }
+                        //Add kill focus in AutoCompleteTextView
+
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(actv.getWindowToken(), 0);
+                    }
+                }
+        );
+
+
+        actv.setOnEditorActionListener(
+                new AutoCompleteTextView.OnEditorActionListener(){
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        boolean handled = false;
+                        if(actionId == EditorInfo.IME_ACTION_GO){
+                            Toast.makeText(JobsSelection.this, "Enter Key Pressed", Toast.LENGTH_SHORT).show();
+                            handled = true;
+                            String item = actv.getText().toString();
+                            //Add call to regenerate ListView
+                            updateLocation(item);
+                            //Add kill focus in AutoCompleteTextView
+                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(actv.getWindowToken(), 0);
+                        }
+                        return handled;
+                    }
+                }
+        );
+
+        /*
+        actv.setOnKeyListener(
+            new AdapterView.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if (keyCode == EditorInfo.IME_ACTION_SEARCH ||
+                            keyCode == EditorInfo.IME_ACTION_DONE ||
+                            event.getAction() == KeyEvent.ACTION_DOWN &&
+                            event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                        if (!event.isShiftPressed()) {
+                            Toast.makeText(JobsSelection.this, "Enter Key Pressed", Toast.LENGTH_SHORT).show();
+                        }
+                            return true;
+                        }
+                    return false; // pass on to other listeners.
+                    }
+            }
+        );
+        */
+
+
 
         mResultReceiver = new AddressResultReceiver(new Handler());
-
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mFetchAddressButton = (Button) findViewById(R.id.gpsButton);
 
@@ -164,7 +265,36 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
         updateUIWidgets();
 
         buildGoogleApiClient();
+    }
 
+    public void updateLocation(String location){
+        //Split location string and update city and province locations
+        StringTokenizer sT = new StringTokenizer(location, ", ");
+
+            city = sT.nextToken();
+            province = sT.nextToken();
+        if(sT.hasMoreTokens()){
+            province += " " + sT.nextToken();
+        }
+
+        //Set up image
+        provinces = getApplicationContext().getResources().getStringArray(R.array.provinces);
+        img = getApplicationContext().getResources().obtainTypedArray(R.array.provinces_pic);
+        int i;
+        for(i=0; i<3; i++){
+            if(provinces[i].equals(province)){
+                break;
+            }
+        }
+
+        imageView = (ImageView) findViewById(R.id.flagImageView);
+        imageView.setImageResource(img.getResourceId(i, -1));
+        //Get InfoLinks for new location
+        ail = dataLink.getInfoLinks(current, province, city);
+
+        ila = new InfoLinkAdapter(getApplicationContext(), android.R.layout.simple_selectable_list_item, ail );
+        //Set Display
+        lv.setAdapter( ila );
 
     }
 
@@ -329,6 +459,10 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
         } else {
             mProgressBar.setVisibility(ProgressBar.GONE);
             mFetchAddressButton.setEnabled(true);
+            //Add kill focus in AutoCompleteTextView
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(actv.getWindowToken(), 0);
+            actv.dismissDropDown();
         }
     }
 
@@ -369,6 +503,9 @@ public class JobsSelection extends ActionBarActivity implements ConnectionCallba
 
             // Show a toast message if an address was found.
             if (resultCode == Constants.SUCCESS_RESULT) {
+                String item = actv.getText().toString();
+                //Add call to regenerate ListView
+                updateLocation(item);
                 showToast(getString(R.string.address_found));
             }
 

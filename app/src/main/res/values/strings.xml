@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">The Job Moose</string>
+    <string name="app_name">Job Moose</string>
+    <string name="app_description">Youth Occupation Matchmaker</string>
     <string name="action_settings">Settings</string>
     <string name="location_TextField">Kingston, Ontario</string>
     <string name="app_Title">Name Pending</string>
     <string name="gps_button">GPS</string>
-    <string name="location_header">Location to refine occupation info:</string>
+    <string name="location_header">Update location to refine links:</string>
     <string name="gps_continue">Continue</string>
     <string name="title_activity_jobs_selection">Occupation Information</string>
     <string name="no_location_detected">        No location detected. Make sure location is enabled on the device.</string>
@@ -22,12 +23,22 @@
     <string name="web_links_title">Web Links:</string>
     <string name="occupation_info" />
     <string-array name="list_of_cities">
-    <item >Calgary</item>
-    <item >Vancouver</item>
-    <item >Victoria</item>
-    <item >Kingston</item>
-    <item >Toronto</item>
-    <item >Edmonton</item>
+    <item >Calgary, Alberta</item>
+    <item >Vancouver, British Columbia</item>
+    <item >Victoria, British Columbia</item>
+    <item >Kingston, Ontario</item>
+    <item >Toronto, Ontario</item>
+    <item >Edmonton, Alberta</item>
+    </string-array>
+    <string-array name="provinces">
+        <item>Alberta</item>
+        <item>British Columbia</item>
+        <item>Ontario</item>
+    </string-array>
+    <string-array name="provinces_pic">
+        <item>@drawable/alberta</item>
+        <item>@drawable/britishcolumbia</item>
+        <item>@drawable/ontario</item>
     </string-array>
     <string-array name="list_of_occupation_icons">
         <item>@drawable/agriculture</item>
